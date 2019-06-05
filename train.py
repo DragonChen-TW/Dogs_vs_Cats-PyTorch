@@ -35,7 +35,7 @@ if __name__ == '__main__':
     device = torch.device('cuda')
 
     # == Model ==
-    model = models.ResNet()
+    model = models.LeNet()
     model = model.to(device)
 
     # == Load Data ==
@@ -52,13 +52,13 @@ if __name__ == '__main__':
     optimizer = torch.optim.Adam(model.parameters())
 
     # == Main Loop ==
-    max_acc = 80
-    max_epoch = 3
+    max_acc = 0
+    max_epoch = 1
     for epoch in range(max_epoch):
         train(model, train_data, epoch, criterion, optimizer)
         acc = val(model, val_data)
         if acc > max_acc:
             max_acc = acc
-            torch.save(model, 'checkpoints/resnet_max.pt')
+            torch.save(model, 'checkpoints/lenet_max.pt')
 
     print('==========Max Acc: {}=========='.format(max_acc))
